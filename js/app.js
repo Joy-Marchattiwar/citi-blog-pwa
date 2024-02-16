@@ -8,20 +8,66 @@ if ("serviceWorker" in navigator) {
 }
 
 
+// get blog by id 
+
 const url = 'https://jsonplaceholder.typicode.com/posts';
 
-fetch(url)
-  .then(resp => resp.json())
-  .then(data => {
-    console.log(data);
-    let blogList = `<p><b>Blog List</b></p>`;
-    data.forEach(elem => {
-      blogList += `<p>${elem.title}</p>`;
-    });
-    document.getElementById('blog-list').innerHTML = blogList;
-  })
-  .catch();
+const getBlogById = () => {
+  const blogId = document.getElementById('blog-id').value;
+  console.log(blogId);
 
+  fetch(`${url}/${blogId}`)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data);
+      document.getElementById('blog-title').innerHTML = data.title;
+      document.getElementById('blog-body').innerHTML = data.body;
+      data.forEach(elem => {
+        blogList += `<p>${elem.title}</p>`;
+      });
+      document.getElementById('blog-list').innerHTML = blogList;
+    })
+    .catch();
+}
+
+const writeBlog = () => {
+
+  fetch()
+    .then()
+    .then()
+    .catch(e => console.log(e));
+
+
+};
+
+const getBlogList = () => {
+  console.log('getBlogList');
+
+  fetch(`${url}/${blogId}`)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data);
+      data.forEach(elem => {
+        blogList += `<p>${elem.title}</p>`;
+      });
+      document.getElementById('blog-list').innerHTML = blogList;
+    })
+    .catch(e => console.log(e));
+}
+
+
+// const url = 'https://jsonplaceholder.typicode.com/posts';
+// fetch(url)
+//   .then(resp => resp.json())
+//   .then(data => {
+//     console.log(data);
+//     let blogList = `<p><b>Blog List</b></p>`;
+//     data.forEach(elem => {
+//       blogList += `<p>${elem.title}</p>`;
+//     });
+//     document.getElementById('blog-list').innerHTML = blogList;
+//   })
+//   .catch();
 
 // camera access 
 
@@ -41,7 +87,8 @@ else {
 // source: https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos 
 
 
-(() => {
+const camPics = () => {
+
   const width = 320;
   let height = 0;
   let streaming = false;
@@ -51,6 +98,7 @@ else {
   let startbutton = null;
 
   function showViewLiveResultButton() {
+
     if (window.self !== window.top) {
       document.querySelector(".contentarea").remove();
       const button = document.createElement("button");
@@ -133,7 +181,9 @@ else {
     }
   }
   window.addEventListener("load", startup, false);
-})();
+}
+
+camPics();
 
 
 
